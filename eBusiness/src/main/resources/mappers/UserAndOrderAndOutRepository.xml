@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ch.ebusiness.repository.admin.UserAndOrderAndOutRepository">
+
+	<select id="selectCartUser" resultType="map"  parameterType="int" >
+		select * from carttable where busertable_id = #{id}
+	</select>
+
+	<select id="selectOrderUser" resultType="map"  parameterType="int">
+		select * from orderbasetable where busertable_id = #{id}
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="selectOrderByPage"  resultType="map">
+		select obt.*, bt.bemail from orderbasetable obt, busertable bt where obt.busertable_id = bt.id limit #{startIndex}, #{perPageSize} 
+	</select>
+</mapper>

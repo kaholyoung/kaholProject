@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ch.ebusiness.repository.admin.GoodsRepository">
+
+
+
+	<!-- 查询商品详情 -->
+	<select id="selectAGoods"  resultType="Goods">
+		select 
+			gt.*, gy.typename 
+		from 
+			goodstable gt,goodstype gy 
+		where 
+			gt.goodstype_id = gy.id 
+			and gt.id = #{id}
+	</select>
+
+	<select id="selectFocusGoods" parameterType="integer" resultType="map">
+		select * from focustable where goodstable_id = #{id}
+	</select>
+
+
+	<select id="selectCartGoods" parameterType="integer" resultType="map">
+		select * from carttable where goodstable_id = #{id}
+	</select>
+
+
+	<select id="selectOrderGoods" parameterType="integer" resultType="map">
+		select * from orderdetail where goodstable_id = #{id}
+	</select>
+
+	<select id="selectAllGoodsByPage"  resultType="Goods">
+		select gt.*,gy.typename
+		from goodstable gt,goodstype gy
+		where gt.goodstype_id = gy.id
+		order by id desc limit #{startIndex}, #{perPageSize}
+	</select>
+
+</mapper>
